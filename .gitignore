@@ -7,5 +7,5 @@ node_modules/
 .DS_Store
 # renders made while working stay out of the repository
 *.mp4
-!assets/*.mp4
+!assets/**/*.mp4
 *.wav
