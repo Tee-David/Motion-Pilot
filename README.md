@@ -20,6 +20,14 @@ npx skills add Tee-David/Motion-Pilot
 
 Works with Claude Code, Codex, Cursor, OpenCode and the other agents the [skills CLI](https://skills.sh) supports.
 
+<p align="center">
+  <a href="assets/intro/motion-pilot-intro-dark.mp4">
+    <img src="assets/intro/motion-pilot-intro.gif" alt="The Motion Pilot intro: a paper plane glides in, loops once laying a dotted trail, lands and becomes the logo, then the install command types out" width="720">
+  </a>
+  <br>
+  <sub>Made with Motion Pilot. Watch with sound: <a href="assets/intro/motion-pilot-intro-dark.mp4">navy</a> · <a href="assets/intro/motion-pilot-intro-light.mp4">paper</a></sub>
+</p>
+
 ## What it makes
 
 | Piece | What you get |
