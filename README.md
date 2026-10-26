@@ -1,4 +1,9 @@
-# Motion Pilot
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo/logo-dark.svg">
+    <img src="assets/logo/logo-light.svg" alt="Motion Pilot" width="420">
+  </picture>
+</p>
 
 [![Check](https://github.com/Tee-David/Motion-Pilot/actions/workflows/check.yml/badge.svg)](https://github.com/Tee-David/Motion-Pilot/actions/workflows/check.yml)
 [![skills.sh](https://skills.sh/b/Tee-David/Motion-Pilot)](https://skills.sh/Tee-David/Motion-Pilot)
