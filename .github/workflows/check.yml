@@ -1,0 +1,33 @@
+name: Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install
+        run: pip install pyyaml numpy pillow scipy
+      - name: Skill frontmatter, size and links
+        run: python .github/scripts/check_skill.py
+      - name: Python scripts compile
+        run: python -m py_compile skills/motion-pilot/scripts/*.py
+      - name: Engine and templates parse
+        run: node --check skills/motion-pilot/engine/*.js skills/motion-pilot/templates/*.js
+      - name: Skill is discoverable by the skills CLI
+        run: npx --yes skills add . --list
+        env:
+          DISABLE_TELEMETRY: "1"

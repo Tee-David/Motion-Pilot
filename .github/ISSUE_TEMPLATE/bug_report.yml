@@ -1,0 +1,39 @@
+name: Bug report
+description: Something Motion Pilot did wrong, or a script that failed
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for helping improve Motion Pilot. Never include API keys or a client's unreleased material."
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you asked for, what you expected, and what you got. Frames or a contact sheet help.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: The prompt, or the script and its arguments, and any error output.
+    validations:
+      required: true
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and model
+      placeholder: Claude Code, Codex, Cursor...
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: macOS 15, Python 3.12, ffmpeg 7
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety
+      options:
+        - label: I removed keys and any material I do not have the right to share.
+          required: true

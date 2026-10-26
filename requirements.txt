@@ -1,0 +1,10 @@
+# Rendering, review and reference analysis
+playwright>=1.40
+numpy>=1.24
+pillow>=10.0
+scipy>=1.10
+# Optional: voice alignment
+# faster-whisper>=1.0
+# Optional: free local draft voice
+# kokoro-onnx>=0.4
+# soundfile>=0.12

@@ -1,0 +1,23 @@
+name: Feature request
+description: A kind of piece, a move, a check or a tool Motion Pilot should handle
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What do you want to make or check?
+      description: Describe the piece or the problem, with a reference if you have one.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: How should it work?
+      description: Numbers and decisions beat adjectives.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

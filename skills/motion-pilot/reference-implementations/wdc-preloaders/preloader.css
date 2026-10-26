@@ -1,0 +1,607 @@
+/* ============================================================================
+   Preloader and page curtain.
+
+   The choreography is written here, a beat at a time, as CSS animations with
+   delays. The component only switches phases (`data-phase`: enter, wait,
+   leave), which is why the first load can start before any JavaScript has
+   run: the overlay is in the server HTML and the clock starts at first paint.
+
+   Every timing is in milliseconds from the start of its phase. The numbers
+   the component also needs (when to leave, when the curtain has closed, when
+   the build is done) are repeated in TIMES in preloader.tsx.
+
+   Transform and opacity only, with two exceptions that are the drawing
+   itself: `stroke-dashoffset` on the pens that reveal the C, and
+   `stroke-dasharray` on the four swirl strokes. Both are single paths inside
+   one small SVG.
+   ========================================================================== */
+
+/* The mark's pieces, defined once and placed with <use>. Not `display: none`,
+   which some engines treat as "do not resolve references into this". */
+.pl-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.pl {
+  position: fixed; inset: 0; z-index: 1000;
+  pointer-events: none;
+  /* The SVGs paint outside their boxes on purpose (the guides cross the
+     whole screen); nothing may paint outside the window. */
+  overflow: hidden;
+  /* ONE number, the mark's height; everything else follows from it.
+     --mw   the mark's width, from the 904 x 944 viewBox
+     --fs   the wordmark's size, the header lockup's ratio (16.8 / 36)
+     --ww   the wordmark's width: "Creativity" is 4.50em in Space Grotesk
+            Bold and 4.56em in the fallback, so the wider is reserved
+     --gap  mark to wordmark, the header's 8 / 36 */
+  --h: clamp(66px, 13vmin, 120px);
+  --mw: calc(var(--h) * 904 / 944);
+  --fs: calc(var(--h) * .45);
+  --ww: calc(var(--fs) * 4.56);
+  --gap: calc(var(--h) * .22);
+  /* The orange is the brand's cursor and nib, and nothing else here. */
+  --pl-orange: #ff6500;
+}
+
+/* The first-load overlays are in the server HTML for both concepts and stay
+   hidden unless the pre-paint script chose this one. */
+.pl[data-mode="load"] { display: none; }
+html[data-preload="play"][data-loader="ink"] .pl-ink[data-mode="load"],
+html[data-preload="play"][data-loader="blueprint"] .pl-bp[data-mode="load"] { display: block; }
+
+/* Between pages the curtain takes the clicks for the second it is up, so a
+   second click cannot land on a page that is leaving. The first load stays
+   pass-through: nobody chose to wait for it. */
+.pl[data-mode="route"] { pointer-events: auto; }
+
+/* Shared by both concepts' wordmarks and labels. */
+.pl svg { overflow: visible; display: block; }
+.pl svg * { transform-box: fill-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pl { display: none !important; }
+}
+
+/* ============================================================================
+   CONCEPT 1: INK.
+
+   Paper and ink. In light mode the sheet is the brand's paper (#f9f7f4) with
+   navy ink, a shade off the site's white so it reads as a sheet laid over the
+   page; in dark mode a lifted night (#08081f) with white ink. Orange only for
+   the cursor, the nib and the ring.
+
+   THE LOAD, beat by beat (ms):
+      0  the cursor fades in where the nib will be, and blinks once
+    220  four ink strokes orbit in, one every 45ms, spiralling from twice the
+         mark's size down to the radius of the fingertip each one becomes,
+         shortening as they go until each is a dot
+   ~900  the dots are the fingertips: each pops into its real shape
+    900  the palm and thumb reach in from the wrist
+   1000  the hand draws the C: the top arc clockwise, the bottom arc
+         anticlockwise 60ms behind, both from the hand outwards
+   1480  the cursor squashes and the nib pops out of it; the ring goes out
+   1760  the mark slides left to make room for the name
+   1880  the name is typed, 34ms a letter
+   2760  leave: the lockup rises away, then the sheet lifts on a curved edge
+
+   BETWEEN PAGES (ms): the sheet rises over the page with its leading edge
+   bowed (0-480); the fingertips tap in (260), the hand reaches (300), the C
+   draws (360 and 400), the nib lands (600) and the page name is typed under
+   the mark (480, 20ms a letter). If the page is not ready at 860 the
+   fingertips keep tapping, a typing indicator, until it is.
+   ========================================================================== */
+
+.pl-ink {
+  --g: #f9f7f4;
+  --ink: #000065;
+  --label: #0e0e2c;
+  --shade: rgba(14, 14, 44, .16);
+  /* How far the curved edge bows: a gentle curve on a wide screen, a deeper
+     one on a phone, where 22vh would be a third of the width. */
+  --bulge: min(20vh, 32vw);
+}
+.dark .pl-ink {
+  --g: #08081f;
+  --ink: #ffffff;
+  --label: #c9cae8;
+  --shade: rgba(0, 0, 0, .55);
+}
+
+.ink-sheet { position: absolute; inset: 0; background: var(--g); will-change: transform; }
+/* The bowed edges. ::before leads when the sheet rises over a page; ::after
+   trails when it lifts away. Each is an ellipse of the sheet's own colour
+   hung off one edge and flattened to nothing at rest. */
+.ink-sheet::before,
+.ink-sheet::after {
+  content: ""; position: absolute; left: -12%; width: 124%; height: var(--bulge);
+  background: inherit; transform: scaleY(0);
+}
+.ink-sheet::before {
+  bottom: calc(100% - 1px);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  transform-origin: 50% 100%;
+  box-shadow: 0 -18px 40px var(--shade);
+}
+.ink-sheet::after {
+  top: calc(100% - 1px);
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  transform-origin: 50% 0;
+  box-shadow: 0 18px 40px var(--shade);
+}
+
+.ink-stage {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: calc(var(--h) * .3);
+}
+.ink-lockup { display: flex; align-items: center; gap: var(--gap); }
+.ink-mark { width: var(--mw); height: var(--h); flex: none; }
+
+/* --- the pieces at rest ------------------------------------------------- */
+.ink-palm, .ink-thumb, .ink-f, .ink-arc { fill: var(--ink); }
+.ink-nib, .ink-bar, .ink-caret { fill: var(--pl-orange); }
+.ink-ring { fill: none; stroke: var(--pl-orange); stroke-width: 12; opacity: 0; transform-origin: 50% 50%; }
+.ink-pen {
+  fill: none; stroke: #fff; stroke-width: 250; stroke-linecap: round;
+  stroke-dasharray: 1 2; stroke-dashoffset: 1.001;
+}
+.pl .ink-s {
+  fill: none; stroke: var(--ink); stroke-width: 44; stroke-linecap: round;
+  stroke-dasharray: 0 1; opacity: 0;
+  /* Rotates and scales about the C's centre, not the stroke's own box.
+     `.pl` in the selector so it outranks `.pl svg *` above. */
+  transform-box: view-box; transform-origin: 515px 459px;
+}
+.ink-f { transform-origin: 50% 50%; }
+.ink-hand { transform-origin: 0% 100%; }
+.ink-nib { transform-origin: 50% 62%; }
+.ink-bar { transform-origin: 0% 50%; }
+.ink-caret { transform-origin: 50% 100%; }
+
+/* --- the load ----------------------------------------------------------- */
+.pl-ink[data-mode="load"] .ink-caret { animation: ink-caret 1580ms linear both; }
+.pl-ink[data-mode="load"] .ink-s--1 { animation: ink-swirl-1 680ms cubic-bezier(.45, 0, .2, 1) 220ms both, ink-out 140ms linear 860ms forwards; }
+.pl-ink[data-mode="load"] .ink-s--2 { animation: ink-swirl-2 680ms cubic-bezier(.45, 0, .2, 1) 265ms both, ink-out 140ms linear 905ms forwards; }
+.pl-ink[data-mode="load"] .ink-s--3 { animation: ink-swirl-3 680ms cubic-bezier(.45, 0, .2, 1) 310ms both, ink-out 140ms linear 950ms forwards; }
+.pl-ink[data-mode="load"] .ink-s--4 { animation: ink-swirl-4 680ms cubic-bezier(.45, 0, .2, 1) 355ms both, ink-out 140ms linear 995ms forwards; }
+.pl-ink[data-mode="load"] .ink-f--1 { animation: ink-pop 380ms cubic-bezier(.2, .7, .3, 1) 850ms both; }
+.pl-ink[data-mode="load"] .ink-f--2 { animation: ink-pop 380ms cubic-bezier(.2, .7, .3, 1) 895ms both; }
+.pl-ink[data-mode="load"] .ink-f--3 { animation: ink-pop 380ms cubic-bezier(.2, .7, .3, 1) 940ms both; }
+.pl-ink[data-mode="load"] .ink-f--4 { animation: ink-pop 380ms cubic-bezier(.2, .7, .3, 1) 985ms both; }
+.pl-ink[data-mode="load"] .ink-hand { animation: ink-reach 420ms cubic-bezier(.34, 1.45, .64, 1) 900ms both; }
+.pl-ink[data-mode="load"] .ink-pen--top { animation: ink-draw 500ms cubic-bezier(.65, 0, .35, 1) 1000ms both; }
+.pl-ink[data-mode="load"] .ink-pen--bot { animation: ink-draw 500ms cubic-bezier(.65, 0, .35, 1) 1060ms both; }
+.pl-ink[data-mode="load"] .ink-nib { animation: ink-nib 340ms cubic-bezier(.2, .7, .3, 1) 1540ms both; }
+.pl-ink[data-mode="load"] .ink-bar { animation: ink-bar 220ms cubic-bezier(.16, 1, .3, 1) 1660ms both; }
+.pl-ink[data-mode="load"] .ink-ring { animation: ink-ring 460ms cubic-bezier(.16, 1, .3, 1) 1560ms both; }
+/* Centred on its own until the name needs the room. Half the wordmark and the
+   gap, so the finished lockup is centred as a whole. */
+.pl-ink[data-mode="load"] .ink-mark {
+  transform: translateX(calc((var(--gap) + var(--ww)) / 2));
+  animation: ink-slide 520ms cubic-bezier(.16, 1, .3, 1) 1760ms forwards;
+}
+
+/* The name. Each letter appears on its beat, typed in order. No cursor rides
+   along the letters: the owner asked for the text to stay clean (the orange
+   bars read as stray lines), so the only cursor is the one that becomes the
+   nib. */
+.ink-word {
+  width: var(--ww); flex: none;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-size: var(--fs); font-weight: 700; line-height: .95; letter-spacing: -.025em;
+  color: var(--ink);
+}
+.ink-line { display: block; white-space: pre; }
+.ink-ch {
+  position: relative; opacity: 0;
+  animation: ink-type 1ms linear forwards;
+  animation-delay: calc(var(--t0) + var(--i) * var(--step));
+}
+.pl-ink[data-mode="load"] { --t0: 1880ms; --step: 34ms; }
+
+/* --- between pages ------------------------------------------------------ */
+.pl-ink[data-mode="route"] { --t0: 480ms; --step: 20ms; }
+.pl-ink[data-mode="route"] .ink-sheet { animation: ink-rise 480ms cubic-bezier(.77, 0, .18, 1) both; }
+.pl-ink[data-mode="route"] .ink-sheet::before { animation: ink-head 480ms cubic-bezier(.77, 0, .18, 1) both; }
+.pl-ink[data-mode="route"] .ink-f--1 { animation: ink-pop 340ms cubic-bezier(.2, .7, .3, 1) 260ms both; }
+.pl-ink[data-mode="route"] .ink-f--2 { animation: ink-pop 340ms cubic-bezier(.2, .7, .3, 1) 300ms both; }
+.pl-ink[data-mode="route"] .ink-f--3 { animation: ink-pop 340ms cubic-bezier(.2, .7, .3, 1) 340ms both; }
+.pl-ink[data-mode="route"] .ink-f--4 { animation: ink-pop 340ms cubic-bezier(.2, .7, .3, 1) 380ms both; }
+.pl-ink[data-mode="route"] .ink-hand { animation: ink-reach 380ms cubic-bezier(.34, 1.45, .64, 1) 300ms both; }
+.pl-ink[data-mode="route"] .ink-pen--top { animation: ink-draw 340ms cubic-bezier(.65, 0, .35, 1) 360ms both; }
+.pl-ink[data-mode="route"] .ink-pen--bot { animation: ink-draw 340ms cubic-bezier(.65, 0, .35, 1) 400ms both; }
+.pl-ink[data-mode="route"] .ink-nib { animation: ink-nib 300ms cubic-bezier(.2, .7, .3, 1) 600ms both; }
+.pl-ink[data-mode="route"] .ink-bar { animation: ink-bar 200ms cubic-bezier(.16, 1, .3, 1) 680ms both; }
+.pl-ink[data-mode="route"] .ink-ring { animation: ink-ring 420ms cubic-bezier(.16, 1, .3, 1) 620ms both; }
+
+.ink-label {
+  display: block; min-height: 1.2em; white-space: pre;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: clamp(14px, 1.5vw, 17px); font-weight: 500; line-height: 1.2; letter-spacing: .01em;
+  color: var(--label);
+}
+
+/* PHONES: THE SHEET DROPS FROM THE TOP (owner's call, 2026-10-25).
+   The way out, the sheet lifting off the page on its bowed bottom edge, is
+   the move the owner likes; the way in should answer it. Rising from the
+   bottom, first bowed and then straight, it met the phone menu sliding away
+   sideways and read as something coming in from a corner. So on a phone the
+   same bowed bottom edge leads the sheet DOWN from the top, flattens as it
+   lands, and after the build that edge carries it back UP: one shape, down
+   and up, like a blind. It covers the closing menu on the way down. Desktop
+   keeps its rise, and the first-load piece is untouched. `:not(leave)`
+   because these rules come after the leave rules and would otherwise win. */
+@media (max-width: 767px) {
+  .pl-ink[data-mode="route"]:not([data-phase="leave"]) .ink-sheet { animation: ink-drop 520ms cubic-bezier(.77, 0, .18, 1) both; }
+  .pl-ink[data-mode="route"] .ink-sheet::before { animation: none; transform: scaleY(0); }
+  .pl-ink[data-mode="route"]:not([data-phase="leave"]) .ink-sheet::after { animation: ink-drop-edge 520ms cubic-bezier(.77, 0, .18, 1) both; }
+}
+@keyframes ink-drop {
+  from { transform: translateY(calc(-100% - var(--bulge))); }
+  to { transform: none; }
+}
+@keyframes ink-drop-edge {
+  0%, 50% { transform: scaleY(1); }
+  100% { transform: scaleY(0); }
+}
+
+/* Still waiting: the fingertips tap in turn, like a typing indicator. */
+.pl-ink[data-phase="wait"] .ink-f { animation: ink-tap 960ms cubic-bezier(.45, 0, .55, 1) infinite; }
+.pl-ink[data-phase="wait"] .ink-f--2 { animation-delay: 120ms; }
+.pl-ink[data-phase="wait"] .ink-f--3 { animation-delay: 240ms; }
+.pl-ink[data-phase="wait"] .ink-f--4 { animation-delay: 360ms; }
+
+/* --- leaving (both modes) ----------------------------------------------- */
+/* The lockup goes first and fast; exits are quicker than entrances. Then the
+   sheet lifts, its trailing edge bowing down, so the page is uncovered from
+   the corners in. */
+.pl-ink[data-phase="leave"] .ink-stage { animation: ink-stage-out 240ms cubic-bezier(.4, 0, 1, 1) both; }
+.pl-ink[data-phase="leave"] .ink-sheet { animation: ink-lift 640ms cubic-bezier(.77, 0, .18, 1) 60ms both; }
+.pl-ink[data-phase="leave"] .ink-sheet::before { animation: none; }
+.pl-ink[data-phase="leave"] .ink-sheet::after { animation: ink-tail 640ms cubic-bezier(.77, 0, .18, 1) 60ms both; }
+.pl-ink[data-mode="load"][data-phase="leave"] .ink-sheet,
+.pl-ink[data-mode="load"][data-phase="leave"] .ink-sheet::after { animation-duration: 680ms; }
+
+/* --- keyframes ---------------------------------------------------------- */
+@keyframes ink-caret {
+  0% { opacity: 0; transform: none; }
+  4% { opacity: 1; }
+  15% { opacity: 1; }
+  16% { opacity: 0; }
+  25% { opacity: 0; }
+  26% { opacity: 1; transform: none; }
+  93.6% { opacity: 1; transform: none; }
+  97% { opacity: 1; transform: scale(1.5, .55); }
+  100% { opacity: 0; transform: scale(.2, .2); }
+}
+/* One per stroke: each ends at the angle of its fingertip (193.5, 186.2,
+   180.3 and 174.5 degrees about the C's centre), having come most of the way
+   round. The dash grows as it travels and shrinks to nothing as it lands,
+   and a nothing-long dash with round caps is a dot. */
+@keyframes ink-swirl-1 {
+  0% { opacity: 0; stroke-dasharray: 0 1; transform: rotate(-136.5deg) scale(2.15); }
+  12% { opacity: 1; }
+  38% { stroke-dasharray: .12 1; }
+  72% { stroke-dasharray: .05 1; }
+  100% { opacity: 1; stroke-dasharray: 0 1; transform: rotate(193.5deg) scale(1); }
+}
+@keyframes ink-swirl-2 {
+  0% { opacity: 0; stroke-dasharray: 0 1; transform: rotate(-143.8deg) scale(2.3); }
+  12% { opacity: 1; }
+  38% { stroke-dasharray: .1 1; }
+  72% { stroke-dasharray: .045 1; }
+  100% { opacity: 1; stroke-dasharray: 0 1; transform: rotate(186.2deg) scale(1); }
+}
+@keyframes ink-swirl-3 {
+  0% { opacity: 0; stroke-dasharray: 0 1; transform: rotate(-149.7deg) scale(2.05); }
+  12% { opacity: 1; }
+  38% { stroke-dasharray: .13 1; }
+  72% { stroke-dasharray: .05 1; }
+  100% { opacity: 1; stroke-dasharray: 0 1; transform: rotate(180.3deg) scale(1); }
+}
+@keyframes ink-swirl-4 {
+  0% { opacity: 0; stroke-dasharray: 0 1; transform: rotate(-155.5deg) scale(2.2); }
+  12% { opacity: 1; }
+  38% { stroke-dasharray: .11 1; }
+  72% { stroke-dasharray: .045 1; }
+  100% { opacity: 1; stroke-dasharray: 0 1; transform: rotate(174.5deg) scale(1); }
+}
+@keyframes ink-out { to { opacity: 0; } }
+@keyframes ink-pop {
+  0% { opacity: 0; transform: scale(.35); }
+  25% { opacity: 1; }
+  60% { transform: scale(1.12); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes ink-reach {
+  0% { opacity: 0; transform: translate(-160px, 40px) rotate(-10deg); }
+  35% { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes ink-draw { to { stroke-dashoffset: 0; } }
+@keyframes ink-nib {
+  0% { opacity: 0; transform: scale(.15); }
+  12% { opacity: 1; }
+  55% { transform: scale(1.14); }
+  78% { transform: scale(.96); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes ink-bar { from { transform: scaleX(0); } to { transform: none; } }
+/* Invisible at 0%, because `both` holds the first keyframe through the delay
+   and a ring at full strength sat behind the cursor from the first frame. */
+@keyframes ink-ring {
+  0% { opacity: 0; transform: scale(.3); }
+  1% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.9); }
+}
+@keyframes ink-slide { to { transform: none; } }
+@keyframes ink-type { to { opacity: 1; } }
+@keyframes ink-tap {
+  0%, 60%, 100% { transform: none; }
+  25% { transform: translateY(-34px); }
+}
+@keyframes ink-rise {
+  from { transform: translateY(calc(100% + var(--bulge))); }
+  to { transform: none; }
+}
+@keyframes ink-head {
+  0%, 50% { transform: scaleY(1); }
+  100% { transform: scaleY(0); }
+}
+@keyframes ink-lift {
+  from { transform: none; }
+  to { transform: translateY(calc(-100% - var(--bulge))); }
+}
+@keyframes ink-tail {
+  0% { transform: scaleY(0); }
+  45%, 100% { transform: scaleY(1); }
+}
+@keyframes ink-stage-out { to { opacity: 0; transform: translateY(-5vh); } }
+
+/* ============================================================================
+   CONCEPT 2: BLUEPRINT.
+
+   The brand navy (#000065) in light mode; in dark mode a deeper navy
+   (#0a0a3a), still a distinct sheet against the night page. Hairline guides
+   a few shades up from the ground, the brand's mute (#9d9ec9) for trails and
+   the name's first state, white for the mark, orange for the cursor, nib
+   and ring only. (An orange seam where the halves meet was removed at the
+   owner's request.)
+
+   THE LOAD, beat by beat (ms):
+      0  the axes draw out from the C's centre across the screen
+    140  the outer and inner construction circles draw from twelve o'clock
+    360  pen-tool anchors pop where the guides cross, the centre first
+    420  the top arc swings in a hundred and fifty degrees round the centre,
+         a faint trail behind it; the bottom arc follows from the other side
+    760  the hand slides in along the horizontal axis
+    900  the fingertips drop in like rivets
+   1080  the cursor falls down the vertical axis onto the centre anchor,
+         squashes, and the nib springs out of it with the ring
+   1440  the guides leave the frame, outwards
+   1720  the mark turns once as it settles from build size into the lockup
+   2180  the name rises out of its baseline in mute, 24ms a letter, once
+         the turn is all but done (any earlier and the turning mark sweeps
+         across the first letters); each turns white 180ms after it rises,
+         the last at 2960
+   3000  leave: the lockup fades and the sheet parts down the middle, top
+         half up, bottom half down
+
+   BETWEEN PAGES (ms): the halves close (0-460); guides set out (420), arcs swing (460 and 500), hand (540),
+   rivets (640), nib (720); the page name rises under the mark (600). Built
+   at 960; still waiting, the fingertips drum.
+   ========================================================================== */
+
+.pl-bp {
+  --g: #000065;
+  --guide: #3434b8;
+  --mute: #9d9ec9;
+  --ink: #ffffff;
+}
+.dark .pl-bp {
+  --g: #0a0a3a;
+  --guide: #2c2c86;
+}
+
+.bp-half { position: absolute; left: 0; right: 0; height: calc(50% + 1px); background: var(--g); will-change: transform; }
+.bp-half--top { top: 0; }
+.bp-half--bot { bottom: 0; }
+
+.bp-stage {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: calc(var(--h) * .34);
+}
+/* Perspective for the one turn the mark makes as it settles. */
+.bp-lockup { display: flex; align-items: center; gap: var(--gap); perspective: 1000px; }
+.bp-mark { width: var(--mw); height: var(--h); flex: none; }
+
+/* --- the pieces at rest ------------------------------------------------- */
+.bp-arc, .bp-palm, .bp-thumb, .bp-f { fill: var(--ink); }
+.bp-nib, .bp-bar, .bp-caret { fill: var(--pl-orange); }
+.bp-ring { fill: none; stroke: var(--pl-orange); stroke-width: 12; opacity: 0; transform-origin: 50% 50%; }
+.bp-axis, .bp-circle {
+  fill: none; stroke: var(--guide); stroke-width: 1; vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1 2; stroke-dashoffset: 1;
+}
+.bp-anchor {
+  fill: var(--g); stroke: var(--guide); stroke-width: 1.25; vector-effect: non-scaling-stroke;
+  transform-origin: 50% 50%; transform: scale(0);
+}
+.pl .bp-arc, .pl .bp-trail { transform-box: view-box; transform-origin: 515px 459px; }
+/* The circles are turned to start at twelve o'clock by their own SVG
+   `transform` attribute, which measures from the view box; `.pl svg *`
+   would move that origin to the circle's own box and push it off centre. */
+.pl .bp-circle { transform-box: view-box; transform-origin: 0 0; }
+/* A scaling stroke, unlike the guides: with `non-scaling-stroke` Chrome
+   drew this dash as a whole ring. 12 units is about 2px at desktop size. */
+.bp-trail {
+  fill: none; stroke: var(--mute); stroke-width: 12; stroke-linecap: round;
+  stroke-dasharray: .22 1; opacity: 0;
+}
+.bp-f { transform-origin: 50% 50%; }
+.bp-nib { transform-origin: 50% 62%; }
+.bp-bar { transform-origin: 0% 50%; }
+.bp-caret { transform-origin: 50% 100%; }
+
+/* --- the load ----------------------------------------------------------- */
+.pl-bp[data-mode="load"] .bp-axis--1,
+.pl-bp[data-mode="load"] .bp-axis--2 { animation: bp-draw 520ms cubic-bezier(.16, 1, .3, 1) both, bp-axis-out 420ms cubic-bezier(.7, 0, .84, 0) 1440ms forwards; }
+.pl-bp[data-mode="load"] .bp-axis--3,
+.pl-bp[data-mode="load"] .bp-axis--4 { animation: bp-draw 520ms cubic-bezier(.16, 1, .3, 1) 80ms both, bp-axis-out 420ms cubic-bezier(.7, 0, .84, 0) 1480ms forwards; }
+.pl-bp[data-mode="load"] .bp-circle--outer { animation: bp-draw 620ms cubic-bezier(.65, 0, .35, 1) 140ms both, bp-fade 280ms linear 1440ms forwards; }
+.pl-bp[data-mode="load"] .bp-circle--inner { animation: bp-draw 580ms cubic-bezier(.65, 0, .35, 1) 220ms both, bp-fade 280ms linear 1440ms forwards; }
+.pl-bp[data-mode="load"] .bp-anchor { animation: bp-anchor 260ms cubic-bezier(.34, 1.6, .64, 1) both, bp-anchor-out 200ms cubic-bezier(.4, 0, 1, 1) forwards; animation-delay: calc(360ms + var(--k) * 35ms), calc(1460ms + var(--k) * 20ms); }
+/* The centre anchor goes the moment the nib lands on it. */
+.pl-bp[data-mode="load"] .bp-anchor--0 { animation-delay: 360ms, 1380ms; }
+.pl-bp[data-mode="load"] .bp-arc--top { animation: bp-swing-top 520ms cubic-bezier(.34, 1.4, .64, 1) 420ms both; }
+.pl-bp[data-mode="load"] .bp-trail--top { animation: bp-trail-top 520ms cubic-bezier(.34, 1.4, .64, 1) 420ms both; }
+.pl-bp[data-mode="load"] .bp-arc--bot { animation: bp-swing-bot 520ms cubic-bezier(.34, 1.4, .64, 1) 520ms both; }
+.pl-bp[data-mode="load"] .bp-trail--bot { animation: bp-trail-bot 520ms cubic-bezier(.34, 1.4, .64, 1) 520ms both; }
+.pl-bp[data-mode="load"] .bp-hand { animation: bp-slide 440ms cubic-bezier(.34, 1.5, .64, 1) 760ms both; }
+.pl-bp[data-mode="load"] .bp-f--1 { animation: bp-rivet 300ms cubic-bezier(.34, 1.6, .64, 1) 900ms both; }
+.pl-bp[data-mode="load"] .bp-f--2 { animation: bp-rivet 300ms cubic-bezier(.34, 1.6, .64, 1) 940ms both; }
+.pl-bp[data-mode="load"] .bp-f--3 { animation: bp-rivet 300ms cubic-bezier(.34, 1.6, .64, 1) 980ms both; }
+.pl-bp[data-mode="load"] .bp-f--4 { animation: bp-rivet 300ms cubic-bezier(.34, 1.6, .64, 1) 1020ms both; }
+.pl-bp[data-mode="load"] .bp-caret { animation: bp-fall 1440ms linear both; }
+.pl-bp[data-mode="load"] .bp-nib { animation: ink-nib 320ms cubic-bezier(.2, .7, .3, 1) 1380ms both; }
+.pl-bp[data-mode="load"] .bp-bar { animation: ink-bar 200ms cubic-bezier(.16, 1, .3, 1) 1480ms both; }
+.pl-bp[data-mode="load"] .bp-ring { animation: ink-ring 480ms cubic-bezier(.16, 1, .3, 1) 1390ms both; }
+/* Built a third larger than it lands, centred on its own; then it turns once
+   as it shrinks into the lockup. */
+.pl-bp[data-mode="load"] .bp-mark {
+  transform: translateX(calc((var(--gap) + var(--ww)) / 2)) scale(1.32) rotateY(0deg);
+  animation: bp-settle 520ms cubic-bezier(.65, 0, .35, 1) 1720ms forwards;
+}
+.pl-bp[data-mode="load"] { --t0: 2180ms; --t1: 2360ms; --step: 24ms; }
+
+/* The name, twice: a mute copy whose letters rise out of the baseline, and a
+   white copy on top of it whose letters fade in once each has risen. Each
+   line clips its own letters; the padding keeps the clip clear of ascenders
+   and the descenders of g and y, and the negative margin gives the space
+   back. */
+.bp-word {
+  position: relative; width: var(--ww); flex: none;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-size: var(--fs); font-weight: 700; line-height: .95; letter-spacing: -.025em;
+}
+.bpm-word { display: block; color: var(--mute); }
+.bpw-word { position: absolute; inset: 0; color: var(--ink); }
+.bpm-line, .bpw-line {
+  display: block; white-space: pre; overflow: hidden;
+  padding: .1em 0 .18em; margin: -.1em 0 -.18em;
+}
+.bpm-ch {
+  display: inline-block; transform: translateY(115%);
+  animation: bp-rise 380ms cubic-bezier(.16, 1, .3, 1) both;
+  animation-delay: calc(var(--t0) + var(--i) * var(--step));
+}
+.bpw-ch {
+  display: inline-block; opacity: 0;
+  animation: bp-white 240ms linear both;
+  animation-delay: calc(var(--t1) + var(--i) * var(--step));
+}
+
+/* --- between pages ------------------------------------------------------ */
+.pl-bp[data-mode="route"] { --t0: 600ms; --t1: 780ms; --step: 18ms; }
+.pl-bp[data-mode="route"] .bp-half--top { animation: bp-close-top 460ms cubic-bezier(.77, 0, .18, 1) both; }
+.pl-bp[data-mode="route"] .bp-half--bot { animation: bp-close-bot 460ms cubic-bezier(.77, 0, .18, 1) both; }
+.pl-bp[data-mode="route"] .bp-axis--1,
+.pl-bp[data-mode="route"] .bp-axis--2 { animation: bp-draw 360ms cubic-bezier(.16, 1, .3, 1) 420ms both; }
+.pl-bp[data-mode="route"] .bp-axis--3,
+.pl-bp[data-mode="route"] .bp-axis--4 { animation: bp-draw 360ms cubic-bezier(.16, 1, .3, 1) 460ms both; }
+.pl-bp[data-mode="route"] .bp-circle--outer { animation: bp-draw 380ms cubic-bezier(.65, 0, .35, 1) 440ms both; }
+.pl-bp[data-mode="route"] .bp-circle--inner { animation: bp-draw 360ms cubic-bezier(.65, 0, .35, 1) 480ms both; }
+.pl-bp[data-mode="route"] .bp-anchor { animation: bp-anchor 240ms cubic-bezier(.34, 1.6, .64, 1) both; animation-delay: calc(480ms + var(--k) * 20ms); }
+.pl-bp[data-mode="route"] .bp-anchor--0 { animation: bp-anchor 240ms cubic-bezier(.34, 1.6, .64, 1) 480ms both, bp-anchor-out 160ms cubic-bezier(.4, 0, 1, 1) 720ms forwards; }
+.pl-bp[data-mode="route"] .bp-arc--top { animation: bp-swing-top 320ms cubic-bezier(.34, 1.4, .64, 1) 460ms both; }
+.pl-bp[data-mode="route"] .bp-trail--top { animation: bp-trail-top 320ms cubic-bezier(.34, 1.4, .64, 1) 460ms both; }
+.pl-bp[data-mode="route"] .bp-arc--bot { animation: bp-swing-bot 320ms cubic-bezier(.34, 1.4, .64, 1) 500ms both; }
+.pl-bp[data-mode="route"] .bp-trail--bot { animation: bp-trail-bot 320ms cubic-bezier(.34, 1.4, .64, 1) 500ms both; }
+.pl-bp[data-mode="route"] .bp-hand { animation: bp-slide 320ms cubic-bezier(.34, 1.5, .64, 1) 540ms both; }
+.pl-bp[data-mode="route"] .bp-f--1 { animation: bp-rivet 260ms cubic-bezier(.34, 1.6, .64, 1) 640ms both; }
+.pl-bp[data-mode="route"] .bp-f--2 { animation: bp-rivet 260ms cubic-bezier(.34, 1.6, .64, 1) 670ms both; }
+.pl-bp[data-mode="route"] .bp-f--3 { animation: bp-rivet 260ms cubic-bezier(.34, 1.6, .64, 1) 700ms both; }
+.pl-bp[data-mode="route"] .bp-f--4 { animation: bp-rivet 260ms cubic-bezier(.34, 1.6, .64, 1) 730ms both; }
+.pl-bp[data-mode="route"] .bp-nib { animation: ink-nib 260ms cubic-bezier(.2, .7, .3, 1) 720ms both; }
+.pl-bp[data-mode="route"] .bp-bar { animation: ink-bar 180ms cubic-bezier(.16, 1, .3, 1) 800ms both; }
+.pl-bp[data-mode="route"] .bp-ring { animation: ink-ring 420ms cubic-bezier(.16, 1, .3, 1) 730ms both; }
+
+/* The page's name: small capitals, tracked out, the caption on a drawing. */
+.bp-label {
+  position: relative; display: block; white-space: pre;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: clamp(11px, 1.1vw, 13px); font-weight: 500; line-height: 1.3;
+  letter-spacing: .2em; text-transform: uppercase;
+}
+.bpm-label { display: block; overflow: hidden; color: var(--mute); }
+.bpw-label { position: absolute; inset: 0; overflow: hidden; color: var(--ink); }
+
+.pl-bp[data-phase="wait"] .bp-f { animation: ink-tap 960ms cubic-bezier(.45, 0, .55, 1) infinite; }
+.pl-bp[data-phase="wait"] .bp-f--2 { animation-delay: 120ms; }
+.pl-bp[data-phase="wait"] .bp-f--3 { animation-delay: 240ms; }
+.pl-bp[data-phase="wait"] .bp-f--4 { animation-delay: 360ms; }
+
+/* --- leaving (both modes) ----------------------------------------------- */
+.pl-bp[data-phase="leave"] .bp-stage { animation: bp-stage-out 220ms cubic-bezier(.4, 0, 1, 1) both; }
+.pl-bp[data-phase="leave"] .bp-half--top { animation: bp-open-top 600ms cubic-bezier(.77, 0, .18, 1) 160ms both; }
+.pl-bp[data-phase="leave"] .bp-half--bot { animation: bp-open-bot 600ms cubic-bezier(.77, 0, .18, 1) 160ms both; }
+
+/* --- keyframes ---------------------------------------------------------- */
+@keyframes bp-draw { to { stroke-dashoffset: 0; } }
+/* The dash slides on past the end, so each axis empties from the centre
+   outwards: the guides leave the frame rather than shrinking back. */
+@keyframes bp-axis-out { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -1; } }
+@keyframes bp-fade { to { opacity: 0; } }
+@keyframes bp-anchor { from { transform: scale(0); } to { transform: none; } }
+@keyframes bp-anchor-out { from { transform: none; } to { transform: scale(0); } }
+/* The arcs come a hundred and fifty degrees round the centre, as they do in
+   the brand film: the top one clockwise, the bottom one the other way. */
+@keyframes bp-swing-top {
+  0% { opacity: 0; transform: rotate(-150deg); }
+  15% { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes bp-swing-bot {
+  0% { opacity: 0; transform: rotate(150deg); }
+  15% { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+/* Each trail is a 79-degree dash on the band's centre line, kept just behind
+   its arc's trailing end (-159 degrees for the top arc, 133 for the bottom)
+   for the whole swing, and fading as the arc lands. */
+@keyframes bp-trail-top {
+  0% { opacity: 0; transform: rotate(-388deg); }
+  20% { opacity: .9; }
+  100% { opacity: 0; transform: rotate(-238deg); }
+}
+@keyframes bp-trail-bot {
+  0% { opacity: 0; transform: rotate(283deg); }
+  20% { opacity: .9; }
+  100% { opacity: 0; transform: rotate(133deg); }
+}
+@keyframes bp-slide {
+  0% { opacity: 0; transform: translateX(-420px); }
+  20% { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes bp-rivet {
+  0% { opacity: 0; transform: translateY(-90px); }
+  30% { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+/* 1440ms: hidden for the first 1080, then a fall that accelerates (the
+   timing function on 76% is gravity), a squash on the centre anchor, gone. */
+@keyframes bp-fall {
+  0%, 75% { opacity: 0; transform: translateY(-3000px); }
+  76% { opacity: 1; transform: translateY(-2860px); animation-timing-function: cubic-bezier(.55, 0, 1, .45); }
+  94.4% { opacity: 1; transform: none; animation-timing-function: linear; }
+  97% { opacity: 1; transform: scale(1.6, .45); }
+  100% { opacity: 0; transform: scale(.2); }
+}
+@keyframes bp-settle { to { transform: translateX(0) scale(1) rotateY(360deg); } }
+@keyframes bp-rise { from { transform: translateY(115%); } to { transform: none; } }
+@keyframes bp-white { from { opacity: 0; } to { opacity: 1; } }
+@keyframes bp-close-top { from { transform: translateY(-100%); } to { transform: none; } }
+@keyframes bp-close-bot { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes bp-open-top { from { transform: none; } to { transform: translateY(-100%); } }
+@keyframes bp-open-bot { from { transform: none; } to { transform: translateY(100%); } }
+@keyframes bp-stage-out { to { opacity: 0; transform: scale(.96); } }

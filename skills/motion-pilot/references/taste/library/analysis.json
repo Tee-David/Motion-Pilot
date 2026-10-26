@@ -1,0 +1,1599 @@
+{
+ "ScreenRecording_09-30-2026 12-16-27\u202fPM_1": {
+  "size": [
+   1180,
+   652
+  ],
+  "duration": 18.7,
+  "cuts": 0,
+  "avg_shot_s": 15.55,
+  "cuts_per_10s": 0.0,
+  "palette": [
+   {
+    "hex": "#0401f0",
+    "share": 0.54
+   },
+   {
+    "hex": "#f2f2f7",
+    "share": 0.39
+   },
+   {
+    "hex": "#6059db",
+    "share": 0.02
+   },
+   {
+    "hex": "#5e605a",
+    "share": 0.02
+   },
+   {
+    "hex": "#2a2c25",
+    "share": 0.02
+   },
+   {
+    "hex": "#a09ddf",
+    "share": 0.02
+   }
+  ],
+  "audio": {
+   "lufs": -12.5,
+   "lra": 1.0,
+   "onsets_per_s": 3.3,
+   "centroid_hz": 1532,
+   "sub150_pct": 22,
+   "tempo_rough_bpm": 98
+  }
+ },
+ "ScreenRecording_09-30-2026 7-53-14\u202fPM_1": {
+  "size": [
+   1180,
+   1170
+  ],
+  "duration": 25.0,
+  "cuts": 69,
+  "avg_shot_s": 0.31,
+  "cuts_per_10s": 31.6,
+  "palette": [
+   {
+    "hex": "#5031e5",
+    "share": 0.46
+   },
+   {
+    "hex": "#f8ce99",
+    "share": 0.17
+   },
+   {
+    "hex": "#18122b",
+    "share": 0.16
+   },
+   {
+    "hex": "#261955",
+    "share": 0.09
+   },
+   {
+    "hex": "#d7a776",
+    "share": 0.06
+   },
+   {
+    "hex": "#deb28e",
+    "share": 0.06
+   }
+  ],
+  "audio": {
+   "lufs": -10.0,
+   "lra": 3.6,
+   "onsets_per_s": 3.9,
+   "centroid_hz": 1626,
+   "sub150_pct": 40,
+   "tempo_rough_bpm": 110
+  }
+ },
+ "v10025g50000d7pktlvog65n2kahf7j0": {
+  "size": [
+   1024,
+   576
+  ],
+  "duration": 30.9,
+  "cuts": 3,
+  "avg_shot_s": 6.93,
+  "cuts_per_10s": 1.1,
+  "palette": [
+   {
+    "hex": "#eff4fd",
+    "share": 0.74
+   },
+   {
+    "hex": "#08080a",
+    "share": 0.24
+   },
+   {
+    "hex": "#5e9bf3",
+    "share": 0.01
+   },
+   {
+    "hex": "#aec9f1",
+    "share": 0.01
+   },
+   {
+    "hex": "#93b6ec",
+    "share": 0.0
+   },
+   {
+    "hex": "#9fa2a8",
+    "share": 0.0
+   }
+  ],
+  "audio": {
+   "lufs": -17.9,
+   "lra": 5.6,
+   "onsets_per_s": 2.9,
+   "centroid_hz": 1860,
+   "sub150_pct": 20,
+   "tempo_rough_bpm": 121
+  }
+ },
+ "v12025gd0000d8aov6nog65s86mvrit0": {
+  "size": [
+   1024,
+   576
+  ],
+  "duration": 18.8,
+  "cuts": 7,
+  "avg_shot_s": 1.95,
+  "cuts_per_10s": 4.5,
+  "palette": [
+   {
+    "hex": "#fcfbfa",
+    "share": 0.82
+   },
+   {
+    "hex": "#17171f",
+    "share": 0.11
+   },
+   {
+    "hex": "#ece0a5",
+    "share": 0.03
+   },
+   {
+    "hex": "#585856",
+    "share": 0.02
+   },
+   {
+    "hex": "#a2a19e",
+    "share": 0.02
+   },
+   {
+    "hex": "#ecd76e",
+    "share": 0.01
+   }
+  ],
+  "audio": {
+   "lufs": -12.7,
+   "lra": 2.7,
+   "onsets_per_s": 4.1,
+   "centroid_hz": 1552,
+   "sub150_pct": 25,
+   "tempo_rough_bpm": 110
+  }
+ },
+ "v14025g50000d3r2ue7og65hu4avaoc0": {
+  "size": [
+   928,
+   576
+  ],
+  "duration": 14.6,
+  "cuts": 4,
+  "avg_shot_s": 2.27,
+  "cuts_per_10s": 3.5,
+  "palette": [
+   {
+    "hex": "#f0f0f0",
+    "share": 0.81
+   },
+   {
+    "hex": "#030202",
+    "share": 0.17
+   },
+   {
+    "hex": "#9e9e9e",
+    "share": 0.01
+   },
+   {
+    "hex": "#656464",
+    "share": 0.0
+   },
+   {
+    "hex": "#5f8daf",
+    "share": 0.0
+   },
+   {
+    "hex": "#9cb6c9",
+    "share": 0.0
+   }
+  ],
+  "audio": {
+   "lufs": -11.8,
+   "lra": 3.2,
+   "onsets_per_s": 2.1,
+   "centroid_hz": 1950,
+   "sub150_pct": 23,
+   "tempo_rough_bpm": 70
+  }
+ },
+ "v14025g50000d8el6s7og65v0tvhnil0": {
+  "size": [
+   720,
+   576
+  ],
+  "duration": 30.8,
+  "cuts": 12,
+  "avg_shot_s": 2.12,
+  "cuts_per_10s": 4.3,
+  "palette": [
+   {
+    "hex": "#f9fcf9",
+    "share": 0.74
+   },
+   {
+    "hex": "#030303",
+    "share": 0.21
+   },
+   {
+    "hex": "#a1a4a0",
+    "share": 0.01
+   },
+   {
+    "hex": "#9c6e21",
+    "share": 0.01
+   },
+   {
+    "hex": "#5b9f6e",
+    "share": 0.01
+   },
+   {
+    "hex": "#6da788",
+    "share": 0.01
+   }
+  ],
+  "audio": {
+   "lufs": -18.9,
+   "lra": 3.1,
+   "onsets_per_s": 3.0,
+   "centroid_hz": 1934,
+   "sub150_pct": 25,
+   "tempo_rough_bpm": 127
+  }
+ },
+ "v14044g50000d3uv7c7og65gjbphnm5g": {
+  "size": [
+   576,
+   720
+  ],
+  "duration": 14.3,
+  "cuts": 0,
+  "avg_shot_s": 11.1,
+  "cuts_per_10s": 0.0,
+  "palette": [
+   {
+    "hex": "#19191b",
+    "share": 0.94
+   },
+   {
+    "hex": "#4f5353",
+    "share": 0.03
+   },
+   {
+    "hex": "#32534d",
+    "share": 0.02
+   },
+   {
+    "hex": "#303648",
+    "share": 0.01
+   },
+   {
+    "hex": "#e7ec9d",
+    "share": 0.0
+   },
+   {
+    "hex": "#4d2d50",
+    "share": 0.0
+   }
+  ],
+  "audio": {
+   "lufs": -16.8,
+   "lra": 2.6,
+   "onsets_per_s": 2.3,
+   "centroid_hz": 1383,
+   "sub150_pct": 31,
+   "tempo_rough_bpm": 71
+  }
+ },
+ "v14044g50000d8bktvfog65m7h1g5gkg": {
+  "size": [
+   576,
+   1024
+  ],
+  "duration": 18.9,
+  "cuts": 1,
+  "avg_shot_s": 7.85,
+  "cuts_per_10s": 0.6,
+  "palette": [
+   {
+    "hex": "#251a1e",
+    "share": 0.66
+   },
+   {
+    "hex": "#545460",
+    "share": 0.13
+   },
+   {
+    "hex": "#1ea656",
+    "share": 0.1
+   },
+   {
+    "hex": "#2f324e",
+    "share": 0.04
+   },
+   {
+    "hex": "#969ba4",
+    "share": 0.04
+   },
+   {
+    "hex": "#345a55",
+    "share": 0.04
+   }
+  ],
+  "audio": {
+   "lufs": -12.7,
+   "lra": 1.7,
+   "onsets_per_s": 2.6,
+   "centroid_hz": 1840,
+   "sub150_pct": 8,
+   "tempo_rough_bpm": 94
+  }
+ },
+ "v14044g50000d8ncb3nog65qjub7i4f0": {
+  "size": [
+   1024,
+   576
+  ],
+  "duration": 20.8,
+  "cuts": 1,
+  "avg_shot_s": 8.8,
+  "cuts_per_10s": 0.6,
+  "palette": [
+   {
+    "hex": "#ebebeb",
+    "share": 0.96
+   },
+   {
+    "hex": "#aaa9a8",
+    "share": 0.02
+   },
+   {
+    "hex": "#dfceae",
+    "share": 0.01
+   },
+   {
+    "hex": "#c9baa4",
+    "share": 0.0
+   },
+   {
+    "hex": "#eba519",
+    "share": 0.0
+   },
+   {
+    "hex": "#696766",
+    "share": 0.0
+   }
+  ],
+  "audio": {
+   "lufs": -17.5,
+   "lra": 4.0,
+   "onsets_per_s": 4.0,
+   "centroid_hz": 1402,
+   "sub150_pct": 36,
+   "tempo_rough_bpm": 115
+  }
+ },
+ "v14044g50000d9961n7og65quhgv9k3g": {
+  "size": [
+   576,
+   1024
+  ],
+  "duration": 17.1,
+  "cuts": 1,
+  "avg_shot_s": 6.93,
+  "cuts_per_10s": 0.7,
+  "palette": [
+   {
+    "hex": "#0c0b0f",
+    "share": 0.68
+   },
+   {
+    "hex": "#a4a6ac",
+    "share": 0.11
+   },
+   {
+    "hex": "#595a61",
+    "share": 0.08
+   },
+   {
+    "hex": "#d8d9db",
+    "share": 0.06
+   },
+   {
+    "hex": "#31344a",
+    "share": 0.04
+   },
+   {
+    "hex": "#aba6cc",
+    "share": 0.03
+   }
+  ],
+  "audio": {
+   "lufs": -35.1,
+   "lra": 2.3,
+   "onsets_per_s": 3.1,
+   "centroid_hz": 2135,
+   "sub150_pct": 4,
+   "tempo_rough_bpm": 102
+  }
+ },
+ "v14044g50000dabaem7og65m01k1ovl0": {
+  "size": [
+   576,
+   1024
+  ],
+  "duration": 30.1,
+  "cuts": 3,
+  "avg_shot_s": 6.72,
+  "cuts_per_10s": 1.1,
+  "palette": [
+   {
+    "hex": "#25201d",
+    "share": 0.52
+   },
+   {
+    "hex": "#5f575d",
+    "share": 0.17
+   },
+   {
+    "hex": "#e0e2e8",
+    "share": 0.09
+   },
+   {
+    "hex": "#4c4335",
+    "share": 0.08
+   },
+   {
+    "hex": "#98a6a7",
+    "share": 0.07
+   },
+   {
+    "hex": "#453a2e",
+    "share": 0.06
+   }
+  ],
+  "audio": {
+   "lufs": -14.7,
+   "lra": 3.9,
+   "onsets_per_s": 3.3,
+   "centroid_hz": 1892,
+   "sub150_pct": 25,
+   "tempo_rough_bpm": 106
+  }
+ },
+ "v14044g50000dabpscvog65m0natu9n0": {
+  "size": [
+   1024,
+   576
+  ],
+  "duration": 16.5,
+  "cuts": 4,
+  "avg_shot_s": 2.65,
+  "cuts_per_10s": 3.0,
+  "palette": [
+   {
+    "hex": "#fcfbfa",
+    "share": 0.86
+   },
+   {
+    "hex": "#f05b8c",
+    "share": 0.04
+   },
+   {
+    "hex": "#151015",
+    "share": 0.04
+   },
+   {
+    "hex": "#9d9f9e",
+    "share": 0.02
+   },
+   {
+    "hex": "#5b645d",
+    "share": 0.02
+   },
+   {
+    "hex": "#5f9bda",
+    "share": 0.02
+   }
+  ],
+  "audio": {
+   "lufs": -18.7,
+   "lra": 4.8,
+   "onsets_per_s": 4.2,
+   "centroid_hz": 2274,
+   "sub150_pct": 19,
+   "tempo_rough_bpm": 83
+  }
+ },
+ "v14044g50000dadcur7og65vdje0gkj0": {
+  "size": [
+   576,
+   1024
+  ],
+  "duration": 14.6,
+  "cuts": 3,
+  "avg_shot_s": 2.85,
+  "cuts_per_10s": 2.6,
+  "palette": [
+   {
+    "hex": "#040305",
+    "share": 0.76
+   },
+   {
+    "hex": "#fbf8f9",
+    "share": 0.18
+   },
+   {
+    "hex": "#989696",
+    "share": 0.04
+   },
+   {
+    "hex": "#5c5b5a",
+    "share": 0.01
+   },
+   {
+    "hex": "#cea4a3",
+    "share": 0.0
+   },
+   {
+    "hex": "#95656a",
+    "share": 0.0
+   }
+  ],
+  "audio": {
+   "lufs": -16.8,
+   "lra": 9.2,
+   "onsets_per_s": 2.5,
+   "centroid_hz": 945,
+   "sub150_pct": 50,
+   "tempo_rough_bpm": 121
+  }
+ },
+ "v142ffg50001d9bq317og65j6v5aqjjg": {
+  "size": [
+   1024,
+   576
+  ],
+  "duration": 22.0,
+  "cuts": 5,
+  "avg_shot_s": 3.13,
+  "cuts_per_10s": 2.7,
+  "palette": [
+   {
+    "hex": "#edf3f0",
+    "share": 0.88
+   },
+   {
+    "hex": "#192c26",
+    "share": 0.03
+   },
+   {
+    "hex": "#b5d7c9",
+    "share": 0.03
+   },
+   {
+    "hex": "#56645b",
+    "share": 0.02
+   },
+   {
+    "hex": "#9ca9a0",
+    "share": 0.02
+   },
+   {
+    "hex": "#9ccbb5",
+    "share": 0.02
+   }
+  ],
+  "audio": {
+   "lufs": -6.8,
+   "lra": 2.0,
+   "onsets_per_s": 4.4,
+   "centroid_hz": 2308,
+   "sub150_pct": 11,
+   "tempo_rough_bpm": 102
+  }
+ },
+ "v1c044g50000d5f70cfog65jung4k8lg": {
+  "size": [
+   576,
+   1024
+  ],
+  "duration": 14.7,
+  "cuts": 3,
+  "avg_shot_s": 2.88,
+  "cuts_per_10s": 2.6,
+  "palette": [
+   {
+    "hex": "#101011",
+    "share": 0.82
+   },
+   {
+    "hex": "#f5f4f4",
+    "share": 0.09
+   },
+   {
+    "hex": "#676763",
+    "share": 0.04
+   },
+   {
+    "hex": "#83837a",
+    "share": 0.02
+   },
+   {
+    "hex": "#992021",
+    "share": 0.02
+   },
+   {
+    "hex": "#979693",
+    "share": 0.01
+   }
+  ],
+  "audio": {
+   "lufs": -14.9,
+   "lra": 9.5,
+   "onsets_per_s": 1.7,
+   "centroid_hz": 975,
+   "sub150_pct": 32,
+   "tempo_rough_bpm": 148
+  }
+ },
+ "v1c044g50000d85jlfvog65vfl8lnsj0": {
+  "size": [
+   576,
+   956
+  ],
+  "duration": 26.0,
+  "cuts": 0,
+  "avg_shot_s": 22.81,
+  "cuts_per_10s": 0.0,
+  "palette": [
+   {
+    "hex": "#07080c",
+    "share": 0.81
+   },
+   {
+    "hex": "#5d5e61",
+    "share": 0.08
+   },
+   {
+    "hex": "#8d9092",
+    "share": 0.06
+   },
+   {
+    "hex": "#5c8491",
+    "share": 0.02
+   },
+   {
+    "hex": "#547889",
+    "share": 0.02
+   },
+   {
+    "hex": "#1b204d",
+    "share": 0.01
+   }
+  ],
+  "audio": {
+   "lufs": -20.1,
+   "lra": 3.2,
+   "onsets_per_s": 0.8,
+   "centroid_hz": 2064,
+   "sub150_pct": 13,
+   "tempo_rough_bpm": 121
+  }
+ },
+ "v1c044g50000d8g0v87og65u7fu4mmug": {
+  "size": [
+   1024,
+   576
+  ],
+  "duration": 16.5,
+  "cuts": 4,
+  "avg_shot_s": 2.67,
+  "cuts_per_10s": 3.0,
+  "palette": [
+   {
+    "hex": "#f4faf5",
+    "share": 0.79
+   },
+   {
+    "hex": "#27c24d",
+    "share": 0.14
+   },
+   {
+    "hex": "#9ddeae",
+    "share": 0.03
+   },
+   {
+    "hex": "#b8e5c6",
+    "share": 0.01
+   },
+   {
+    "hex": "#9da29f",
+    "share": 0.01
+   },
+   {
+    "hex": "#70d58b",
+    "share": 0.01
+   }
+  ],
+  "audio": {
+   "lufs": -14.8,
+   "lra": 3.4,
+   "onsets_per_s": 2.2,
+   "centroid_hz": 2676,
+   "sub150_pct": 7,
+   "tempo_rough_bpm": 179
+  }
+ },
+ "v1c044g50000d9jjs17og65v4k5hln6g": {
+  "size": [
+   1024,
+   576
+  ],
+  "duration": 12.5,
+  "cuts": 1,
+  "avg_shot_s": 4.66,
+  "cuts_per_10s": 1.1,
+  "palette": [
+   {
+    "hex": "#0e0f12",
+    "share": 0.71
+   },
+   {
+    "hex": "#aacce6",
+    "share": 0.09
+   },
+   {
+    "hex": "#5da2f2",
+    "share": 0.06
+   },
+   {
+    "hex": "#9aaaad",
+    "share": 0.05
+   },
+   {
+    "hex": "#c9dce8",
+    "share": 0.05
+   },
+   {
+    "hex": "#192f58",
+    "share": 0.05
+   }
+  ],
+  "audio": {
+   "lufs": -11.4,
+   "lra": 3.6,
+   "onsets_per_s": 2.3,
+   "centroid_hz": 2058,
+   "sub150_pct": 17,
+   "tempo_rough_bpm": 78
+  }
+ },
+ "v1c044g50000d9qcpf7og65uei1t5qvg": {
+  "size": [
+   1024,
+   576
+  ],
+  "duration": 26.5,
+  "cuts": 17,
+  "avg_shot_s": 1.29,
+  "cuts_per_10s": 7.3,
+  "palette": [
+   {
+    "hex": "#ededed",
+    "share": 0.61
+   },
+   {
+    "hex": "#020202",
+    "share": 0.35
+   },
+   {
+    "hex": "#a2a1a1",
+    "share": 0.02
+   },
+   {
+    "hex": "#5e5e5e",
+    "share": 0.02
+   },
+   {
+    "hex": "#d94971",
+    "share": 0.01
+   },
+   {
+    "hex": "#2efbad",
+    "share": 0.01
+   }
+  ],
+  "audio": {
+   "lufs": -10.8,
+   "lra": 2.0,
+   "onsets_per_s": 3.3,
+   "centroid_hz": 2301,
+   "sub150_pct": 21,
+   "tempo_rough_bpm": 88
+  }
+ },
+ "v1c044g50000da3rgj7og65phpsau4eg": {
+  "size": [
+   1024,
+   576
+  ],
+  "duration": 24.8,
+  "cuts": 10,
+  "avg_shot_s": 1.96,
+  "cuts_per_10s": 4.6,
+  "palette": [
+   {
+    "hex": "#f2f1f1",
+    "share": 0.54
+   },
+   {
+    "hex": "#bc0e27",
+    "share": 0.36
+   },
+   {
+    "hex": "#a19d9f",
+    "share": 0.03
+   },
+   {
+    "hex": "#222122",
+    "share": 0.02
+   },
+   {
+    "hex": "#5f5b5a",
+    "share": 0.02
+   },
+   {
+    "hex": "#d4a1a3",
+    "share": 0.02
+   }
+  ],
+  "audio": {
+   "lufs": -9.7,
+   "lra": 2.7,
+   "onsets_per_s": 3.2,
+   "centroid_hz": 1982,
+   "sub150_pct": 30,
+   "tempo_rough_bpm": 148
+  }
+ },
+ "v1c044g50000datvm47og65pj7nijh40": {
+  "size": [
+   960,
+   576
+  ],
+  "duration": 27.8,
+  "cuts": 2,
+  "avg_shot_s": 8.19,
+  "cuts_per_10s": 0.8,
+  "palette": [
+   {
+    "hex": "#d8d7d9",
+    "share": 0.41
+   },
+   {
+    "hex": "#42c7b6",
+    "share": 0.32
+   },
+   {
+    "hex": "#959498",
+    "share": 0.12
+   },
+   {
+    "hex": "#000000",
+    "share": 0.08
+   },
+   {
+    "hex": "#6f6d6e",
+    "share": 0.05
+   },
+   {
+    "hex": "#807e82",
+    "share": 0.02
+   }
+  ],
+  "audio": {
+   "lufs": -6.7,
+   "lra": 4.7,
+   "onsets_per_s": 3.4,
+   "centroid_hz": 1248,
+   "sub150_pct": 18,
+   "tempo_rough_bpm": 140
+  }
+ },
+ "v24044gl0000d2m4cg7og65t3kuv8akg": {
+  "size": [
+   1024,
+   576
+  ],
+  "duration": 21.2,
+  "cuts": 7,
+  "avg_shot_s": 2.26,
+  "cuts_per_10s": 3.9,
+  "palette": [
+   {
+    "hex": "#0d0e11",
+    "share": 0.43
+   },
+   {
+    "hex": "#072ccc",
+    "share": 0.26
+   },
+   {
+    "hex": "#f8fcfc",
+    "share": 0.25
+   },
+   {
+    "hex": "#575c63",
+    "share": 0.03
+   },
+   {
+    "hex": "#2e52d3",
+    "share": 0.02
+   },
+   {
+    "hex": "#1e2553",
+    "share": 0.02
+   }
+  ],
+  "audio": {
+   "lufs": -11.6,
+   "lra": 3.6,
+   "onsets_per_s": 2.8,
+   "centroid_hz": 1376,
+   "sub150_pct": 34,
+   "tempo_rough_bpm": 73
+  }
+ },
+ "v26044gc0000d3hu5rnog65nlvvp3f8g": {
+  "size": [
+   1024,
+   576
+  ],
+  "duration": 19.9,
+  "cuts": 1,
+  "avg_shot_s": 8.34,
+  "cuts_per_10s": 0.6,
+  "palette": [
+   {
+    "hex": "#121f17",
+    "share": 0.53
+   },
+   {
+    "hex": "#155a24",
+    "share": 0.22
+   },
+   {
+    "hex": "#159b34",
+    "share": 0.13
+   },
+   {
+    "hex": "#12d046",
+    "share": 0.07
+   },
+   {
+    "hex": "#5d6558",
+    "share": 0.02
+   },
+   {
+    "hex": "#e4f5e7",
+    "share": 0.02
+   }
+  ],
+  "audio": {
+   "lufs": -10.2,
+   "lra": 23.0,
+   "onsets_per_s": 0.4,
+   "centroid_hz": 1372,
+   "sub150_pct": 28,
+   "tempo_rough_bpm": 121
+  }
+ },
+ "v26044gc0000d6sqbrfog65l35pnkr4g": {
+  "size": [
+   576,
+   1024
+  ],
+  "duration": 19.8,
+  "cuts": 1,
+  "avg_shot_s": 8.29,
+  "cuts_per_10s": 0.6,
+  "palette": [
+   {
+    "hex": "#1d1d1c",
+    "share": 0.59
+   },
+   {
+    "hex": "#efedee",
+    "share": 0.2
+   },
+   {
+    "hex": "#5d6059",
+    "share": 0.12
+   },
+   {
+    "hex": "#a3a3a3",
+    "share": 0.04
+   },
+   {
+    "hex": "#594939",
+    "share": 0.03
+   },
+   {
+    "hex": "#48382e",
+    "share": 0.02
+   }
+  ],
+  "audio": {
+   "lufs": -15.3,
+   "lra": 4.3,
+   "onsets_per_s": 2.8,
+   "centroid_hz": 571,
+   "sub150_pct": 40,
+   "tempo_rough_bpm": 121
+  }
+ },
+ "v26044gc0000d9bp3kfog65qro0fgo80": {
+  "size": [
+   1024,
+   576
+  ],
+  "duration": 27.3,
+  "cuts": 9,
+  "avg_shot_s": 2.41,
+  "cuts_per_10s": 3.7,
+  "palette": [
+   {
+    "hex": "#fbfaf7",
+    "share": 0.75
+   },
+   {
+    "hex": "#211517",
+    "share": 0.2
+   },
+   {
+    "hex": "#a09d9b",
+    "share": 0.02
+   },
+   {
+    "hex": "#655d5d",
+    "share": 0.02
+   },
+   {
+    "hex": "#43383a",
+    "share": 0.0
+   },
+   {
+    "hex": "#827b7b",
+    "share": 0.0
+   }
+  ],
+  "audio": {
+   "lufs": -17.4,
+   "lra": 7.4,
+   "onsets_per_s": 1.8,
+   "centroid_hz": 617,
+   "sub150_pct": 11,
+   "tempo_rough_bpm": 121
+  }
+ },
+ "R26-vale-launch": {
+  "size": [
+   1920,
+   1080
+  ],
+  "duration": 62.1,
+  "cuts": 9,
+  "avg_shot_s": 6.21,
+  "cuts_per_10s": 1.4,
+  "pacing": {
+   "change_events": 36,
+   "changes_per_10s": 5.8,
+   "holds": [
+    [
+     60.33,
+     0.6
+    ],
+    [
+     61.27,
+     0.73
+    ]
+   ],
+   "longest_hold_s": 0.73,
+   "still_pct": 2,
+   "busiest_s": [
+    5.87,
+    55.8,
+    52.07,
+    17.47,
+    49.27,
+    35.8
+   ]
+  },
+  "palette": [
+   {
+    "hex": "#161715",
+    "share": 0.51
+   },
+   {
+    "hex": "#f9f9f7",
+    "share": 0.37
+   },
+   {
+    "hex": "#97fd97",
+    "share": 0.06
+   },
+   {
+    "hex": "#73f98e",
+    "share": 0.03
+   },
+   {
+    "hex": "#ddf6ab",
+    "share": 0.01
+   },
+   {
+    "hex": "#555e53",
+    "share": 0.01
+   }
+  ],
+  "audio": {
+   "lufs": -13.5,
+   "lra": 2.6,
+   "onsets_per_s": 3.7,
+   "centroid_hz": 1750,
+   "sub150_pct": 11,
+   "tempo_rough_bpm": 157
+  }
+ },
+ "R27-sun-logo": {
+  "size": [
+   1180,
+   878
+  ],
+  "duration": 8.6,
+  "cuts": 0,
+  "avg_shot_s": 8.64,
+  "cuts_per_10s": 0.0,
+  "pacing": {
+   "change_events": 4,
+   "changes_per_10s": 4.7,
+   "holds": [],
+   "longest_hold_s": 0.0,
+   "still_pct": 0,
+   "busiest_s": [
+    2.47,
+    2.2,
+    1.93,
+    4.93
+   ]
+  },
+  "palette": [
+   {
+    "hex": "#7ca275",
+    "share": 0.94
+   },
+   {
+    "hex": "#84a67a",
+    "share": 0.02
+   },
+   {
+    "hex": "#99b38e",
+    "share": 0.02
+   },
+   {
+    "hex": "#daddcb",
+    "share": 0.01
+   },
+   {
+    "hex": "#b5c5a9",
+    "share": 0.01
+   },
+   {
+    "hex": "#c8d0b9",
+    "share": 0.01
+   }
+  ],
+  "audio": {
+   "lufs": -70.0,
+   "lra": 0.0,
+   "onsets_per_s": 0.0,
+   "centroid_hz": 0,
+   "sub150_pct": 0,
+   "tempo_rough_bpm": 70
+  }
+ },
+ "R28-kantiv-logo": {
+  "size": [
+   1180,
+   642
+  ],
+  "duration": 5.6,
+  "cuts": 0,
+  "avg_shot_s": 5.55,
+  "cuts_per_10s": 0.0,
+  "pacing": {
+   "change_events": 5,
+   "changes_per_10s": 9.1,
+   "holds": [
+    [
+     4.33,
+     1.13
+    ]
+   ],
+   "longest_hold_s": 1.13,
+   "still_pct": 21,
+   "busiest_s": [
+    3.13,
+    2.73,
+    1.67,
+    0.33,
+    3.8
+   ]
+  },
+  "palette": [
+   {
+    "hex": "#3c0d9a",
+    "share": 0.97
+   },
+   {
+    "hex": "#4a1ea0",
+    "share": 0.01
+   },
+   {
+    "hex": "#ece7f3",
+    "share": 0.01
+   },
+   {
+    "hex": "#ac99cf",
+    "share": 0.01
+   },
+   {
+    "hex": "#7251b2",
+    "share": 0.0
+   },
+   {
+    "hex": "#9075c2",
+    "share": 0.0
+   }
+  ],
+  "audio": {
+   "lufs": -70.0,
+   "lra": 0.0,
+   "onsets_per_s": 0.0,
+   "centroid_hz": 0,
+   "sub150_pct": 0,
+   "tempo_rough_bpm": 70
+  }
+ },
+ "R29-famolus-logo": {
+  "size": [
+   1180,
+   872
+  ],
+  "duration": 2.5,
+  "cuts": 0,
+  "avg_shot_s": 2.46,
+  "cuts_per_10s": 0.0,
+  "pacing": {
+   "change_events": 1,
+   "changes_per_10s": 4.2,
+   "holds": [
+    [
+     1.87,
+     0.53
+    ]
+   ],
+   "longest_hold_s": 0.53,
+   "still_pct": 22,
+   "busiest_s": [
+    1.33
+   ]
+  },
+  "palette": [
+   {
+    "hex": "#1b20f4",
+    "share": 0.96
+   },
+   {
+    "hex": "#9da0f0",
+    "share": 0.01
+   },
+   {
+    "hex": "#5e62ee",
+    "share": 0.01
+   },
+   {
+    "hex": "#d6d8f5",
+    "share": 0.01
+   },
+   {
+    "hex": "#3d41ee",
+    "share": 0.0
+   },
+   {
+    "hex": "#7d81ec",
+    "share": 0.0
+   }
+  ],
+  "audio": null
+ },
+ "R30-wdc-ink": {
+  "size": [
+   1080,
+   1080
+  ],
+  "duration": 5.3,
+  "cuts": 0,
+  "avg_shot_s": 5.27,
+  "cuts_per_10s": 0.0,
+  "pacing": {
+   "change_events": 3,
+   "changes_per_10s": 5.8,
+   "holds": [
+    [
+     0.0,
+     0.53
+    ],
+    [
+     2.53,
+     2.0
+    ],
+    [
+     4.8,
+     0.4
+    ]
+   ],
+   "longest_hold_s": 2.0,
+   "still_pct": 56,
+   "busiest_s": [
+    2.13,
+    4.67,
+    0.8
+   ]
+  },
+  "palette": [
+   {
+    "hex": "#f7f6f2",
+    "share": 0.98
+   },
+   {
+    "hex": "#69679c",
+    "share": 0.01
+   },
+   {
+    "hex": "#b1b0c8",
+    "share": 0.01
+   },
+   {
+    "hex": "#9391b5",
+    "share": 0.01
+   },
+   {
+    "hex": "#0d0d67",
+    "share": 0.0
+   },
+   {
+    "hex": "#3c3b84",
+    "share": 0.0
+   }
+  ],
+  "audio": {
+   "lufs": -14.0,
+   "lra": 5.0,
+   "onsets_per_s": 3.0,
+   "centroid_hz": 3462,
+   "sub150_pct": 2,
+   "tempo_rough_bpm": 140
+  }
+ },
+ "R31-wdc-blueprint": {
+  "size": [
+   1080,
+   1080
+  ],
+  "duration": 5.5,
+  "cuts": 0,
+  "avg_shot_s": 5.52,
+  "cuts_per_10s": 0.0,
+  "pacing": {
+   "change_events": 4,
+   "changes_per_10s": 7.3,
+   "holds": [
+    [
+     0.0,
+     0.67
+    ],
+    [
+     1.4,
+     0.47
+    ],
+    [
+     3.0,
+     1.8
+    ],
+    [
+     5.0,
+     0.47
+    ]
+   ],
+   "longest_hold_s": 1.8,
+   "still_pct": 62,
+   "busiest_s": [
+    2.27,
+    5.0,
+    1.13,
+    0.8
+   ]
+  },
+  "palette": [
+   {
+    "hex": "#010165",
+    "share": 0.98
+   },
+   {
+    "hex": "#5e5e9a",
+    "share": 0.01
+   },
+   {
+    "hex": "#eeeef3",
+    "share": 0.01
+   },
+   {
+    "hex": "#8d8eb5",
+    "share": 0.0
+   },
+   {
+    "hex": "#3a3a84",
+    "share": 0.0
+   },
+   {
+    "hex": "#aeaecb",
+    "share": 0.0
+   }
+  ],
+  "audio": {
+   "lufs": -14.1,
+   "lra": 6.7,
+   "onsets_per_s": 2.2,
+   "centroid_hz": 4005,
+   "sub150_pct": 0,
+   "tempo_rough_bpm": 179
+  }
+ },
+ "R32-wdc-ink-route": {
+  "size": [
+   1918,
+   1196
+  ],
+  "duration": 2.7,
+  "cuts": 0,
+  "avg_shot_s": 2.69,
+  "cuts_per_10s": 0.0,
+  "pacing": {
+   "change_events": 1,
+   "changes_per_10s": 3.8,
+   "holds": [
+    [
+     0.6,
+     0.6
+    ],
+    [
+     1.27,
+     0.47
+    ],
+    [
+     2.13,
+     0.47
+    ]
+   ],
+   "longest_hold_s": 0.6,
+   "still_pct": 59,
+   "busiest_s": [
+    1.8
+   ]
+  },
+  "palette": [
+   {
+    "hex": "#f7f6f2",
+    "share": 0.99
+   },
+   {
+    "hex": "#605e97",
+    "share": 0.0
+   },
+   {
+    "hex": "#b5b4ca",
+    "share": 0.0
+   },
+   {
+    "hex": "#9694b4",
+    "share": 0.0
+   },
+   {
+    "hex": "#272676",
+    "share": 0.0
+   },
+   {
+    "hex": "#3a3982",
+    "share": 0.0
+   }
+  ],
+  "audio": null
+ },
+ "R33-wdc-blueprint-route": {
+  "size": [
+   1918,
+   1202
+  ],
+  "duration": 3.0,
+  "cuts": 0,
+  "avg_shot_s": 2.98,
+  "cuts_per_10s": 0.0,
+  "pacing": {
+   "change_events": 0,
+   "changes_per_10s": 0.0,
+   "holds": [
+    [
+     0.0,
+     0.4
+    ],
+    [
+     0.93,
+     0.8
+    ]
+   ],
+   "longest_hold_s": 0.8,
+   "still_pct": 41,
+   "busiest_s": []
+  },
+  "palette": [
+   {
+    "hex": "#020065",
+    "share": 0.99
+   },
+   {
+    "hex": "#5e5e9a",
+    "share": 0.0
+   },
+   {
+    "hex": "#e5e5ed",
+    "share": 0.0
+   },
+   {
+    "hex": "#373683",
+    "share": 0.0
+   },
+   {
+    "hex": "#adadca",
+    "share": 0.0
+   },
+   {
+    "hex": "#8e8db5",
+    "share": 0.0
+   }
+  ],
+  "audio": null
+ }
+}
